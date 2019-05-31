@@ -1,0 +1,74 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.Chip {
+  background-color: aquamarine;
+  display: inline-block;
+  padding: 10px;
+  position: relative;
+}
+
+.Chip:focus {
+  outline: none;
+}
+
+.Chip.Chip--open {
+}
+
+.Details {
+  width: 200px;
+}
+
+.DetailsItem {
+  height: 50px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.Slider {
+  background-color: lightgray;
+  width: 40px;
+  height: 20px;
+  border-radius: 10px;
+}
+
+.SliderBall {
+  position: relative;
+  background-color: #f44262;
+  width: 20px;
+  height: 20px;
+  border-radius: 100px;
+  transition: all;
+  left: 0;
+}
+
+.SliderBall-On {
+  left: 20px;
+}
+
+.List {
+  list-style: none;
+  display: inline-block;
+  padding: 0;
+  width: 200px;
+  position: relative;
+}
+
+.ListItem {
+  /* background-color: #f44262; */
+  box-sizing: border-box;
+  height: 60px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px;
+  background: white;
+}
+
+.ListItem:hover {
+  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
+  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); */
+}
