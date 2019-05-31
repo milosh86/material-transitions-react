@@ -4,49 +4,70 @@ import { useSpring, animated, config, useChain } from "react-spring";
 
 import "./styles.css";
 
-const stiffer = { mass: 1, tension: 250, friction: 25 };
+const stiffer = { mass: 1, tension: 400, friction: 30 };
 
 export default function List() {
   let [selectedPage, setSelectedPage] = useState("GREEN");
 
-  const { scaleRed, navBottomSizeRed, navBottomColorRed } = useSpring({
+  const {
+    scaleRed,
+    opacityRed,
+    navBottomSizeRed,
+    navBottomColorRed
+  } = useSpring({
     config: stiffer,
     from: {
       scaleRed: "scale(0)",
-      navBottomSizeRed: 8,
+      opacityRed: 0,
+      navBottomSizeRed: "scale(1)",
       navBottomColorRed: "lightgray"
     },
     to: {
       scaleRed: selectedPage === "RED" ? "scale(1)" : "scale(0)",
-      navBottomSizeRed: selectedPage === "RED" ? 12 : 8,
+      opacityRed: selectedPage === "RED" ? 1 : 0,
+      navBottomSizeRed: selectedPage === "RED" ? "scale(1.2)" : "scale(1)",
       navBottomColorRed: selectedPage === "RED" ? "#e96368" : "lightgray"
     }
   });
 
-  const { scaleGreen, navBottomSizeGreen, navBottomColorGreen } = useSpring({
+  const {
+    scaleGreen,
+    opacityGreen,
+    navBottomSizeGreen,
+    navBottomColorGreen
+  } = useSpring({
     config: stiffer,
     from: {
       scaleGreen: "scale(0)",
-      navBottomSizeGreen: 8,
+      opacityGreen: 0,
+      navBottomSizeGreen: "scale(1)",
       navBottomColorGreen: "lightgray"
     },
     to: {
       scaleGreen: selectedPage === "GREEN" ? "scale(1)" : "scale(0)",
-      navBottomSizeGreen: selectedPage === "GREEN" ? 12 : 8,
+      opacityGreen: selectedPage === "GREEN" ? 1 : 0,
+      navBottomSizeGreen: selectedPage === "GREEN" ? "scale(1.2)" : "scale(1)",
       navBottomColorGreen: selectedPage === "GREEN" ? "#53cc82" : "lightgray"
     }
   });
 
-  const { scaleBlue, navBottomSizeBlue, navBottomColorBlue } = useSpring({
+  const {
+    scaleBlue,
+    opacityBlue,
+    navBottomSizeBlue,
+    navBottomColorBlue
+  } = useSpring({
     config: stiffer,
     from: {
       scaleBlue: "scale(0)",
-      navBottomSizeBlue: 8,
+      opacityBlue: 0,
+      navBottomSizeBlue: "scale(1)",
       navBottomColorBlue: "lightgray"
     },
     to: {
       scaleBlue: selectedPage === "BLUE" ? "scale(1)" : "scale(0)",
-      navBottomSizeBlue: selectedPage === "BLUE" ? 12 : 8,
+      opacityBlue: selectedPage === "BLUE" ? 1 : 0,
+      navBottomSizeBlue: selectedPage === "BLUE" ? "scale(1.2)" : "scale(1)",
       navBottomColorBlue: selectedPage === "BLUE" ? "#5d5df7" : "lightgray"
     }
   });
@@ -69,16 +90,19 @@ export default function List() {
           color="rgba(233, 99, 104, 0.1)"
           borderColor="#e96368"
           scale={scaleRed}
+          opacity={opacityRed}
         />
         <Content
           color="rgba(83, 204, 130, 0.1)"
           borderColor="#53cc82"
           scale={scaleGreen}
+          opacity={opacityGreen}
         />
         <Content
           color="rgba(93, 93, 247, 0.1)"
           borderColor="#5d5df7"
           scale={scaleBlue}
+          opacity={opacityBlue}
         />
       </div>
       <div
@@ -111,24 +135,23 @@ export default function List() {
   );
 }
 
-function MenuItem({ color = "lightgray", size = 12, ...rest }) {
+function MenuItem({ color = "lightgray", size = 1, ...rest }) {
   return (
-    <div style={{ width: 30 }}>
-      <animated.div
-        style={{
-          height: size,
-          width: size,
-          borderRadius: 100,
-          background: color,
-          cursor: "pointer"
-        }}
-        {...rest}
-      />
-    </div>
+    <animated.div
+      style={{
+        height: 8,
+        width: 8,
+        borderRadius: 100,
+        background: color,
+        cursor: "pointer",
+        transform: size
+      }}
+      {...rest}
+    />
   );
 }
 
-function Content({ color, borderColor, scale }) {
+function Content({ color, borderColor, scale, opacity }) {
   return (
     <animated.div
       style={{
@@ -140,6 +163,7 @@ function Content({ color, borderColor, scale }) {
         border: `1px solid ${borderColor}`,
         borderBottom: "none",
         transform: scale,
+        opacity: opacity,
         position: "absolute"
       }}
     />
